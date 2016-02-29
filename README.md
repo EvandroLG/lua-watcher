@@ -1,5 +1,5 @@
 # lua-watcher
-A lua module to monitor files from a specific directory
+A Lua module to monitor files from a specific directory
 
 ## How does it work?
 Follow an example:
