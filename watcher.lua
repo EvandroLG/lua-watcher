@@ -1,7 +1,9 @@
 local lfs  = require 'lfs'
 
+local last_modified = 0
 local function _check_modification(directory, _last_modified, callback)
-    local last_modified = _last_modified
+
+    last_modified = _last_modified
     local file
 
     for _file in lfs.dir(directory) do
@@ -20,31 +22,24 @@ local function _check_modification(directory, _last_modified, callback)
 end
 
 local function _get_last_modified(directory)
-    local last_modified = 0
+
+    local last = 0
 
     _check_modification(directory, last_modified, function(_last_modified)
-        last_modified = _last_modified
+        last = _last_modified
     end)
 
-    return last_modified
-end
-
-local function _has_updated(last_modified, directory)
-    local has_updated = false
-
-    _check_modification(directory, last_modified, function()
-        has_updated = true
-    end)
-    
-    return has_updated
+    return last
 end
 
 local function watcher(directory, callback)
-    local last_modified = _get_last_modified(directory)
+
+    local last = _get_last_modified(directory)
+    callback()
 
     while true do
         _check_modification(directory, last_modified, function(_last_modified)
-            last_modified = _last_modified
+            last = _last_modified
             callback()
         end)
     end
