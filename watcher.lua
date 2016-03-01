@@ -1,8 +1,13 @@
 local lfs  = require 'lfs'
 
-local last_modified = 0
-local function _check_modification(directory, _last_modified, callback)
+local function ternary(condition, if_true, if_false)
+    return condition and if_true or if_false
+end
 
+local last_modified = 0
+local function _check_modification(dir, _last_modified, callback)
+
+    local directory = ternary(string.sub(dir, #dir, #dir) == '/', dir, dir .. '/')
     last_modified = _last_modified
     local file
 
