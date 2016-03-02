@@ -1,9 +1,9 @@
 package = 'watcher'
-version = '0.1.0-0'
+version = '0.2.0-0'
 
 source = {
   url = 'git://github.com/evandrolg/lua-watcher.git',
-  tag = 'v0.0.1'
+  tag = 'v0.0.2'
 }
 
 description = {
