@@ -6,7 +6,6 @@ end
 
 local last_modified = 0
 local function _check_modification(dir, _last_modified, callback)
-
     local directory = ternary(string.sub(dir, #dir, #dir) == '/', dir, dir .. '/')
     last_modified = _last_modified
     local file
@@ -27,7 +26,6 @@ local function _check_modification(dir, _last_modified, callback)
 end
 
 local function _get_last_modified(directory)
-
     local last = 0
 
     _check_modification(directory, last_modified, function(_last_modified)
@@ -38,7 +36,6 @@ local function _get_last_modified(directory)
 end
 
 local function watcher(directory, callback)
-
     local last = _get_last_modified(directory)
     callback()
 
